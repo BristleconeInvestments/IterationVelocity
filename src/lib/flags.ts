@@ -11,16 +11,35 @@ export type Flag<T> = {
 const getFlagValue = <T>(key: string, defaultValue: T): T => {
     if (typeof window === 'undefined') return defaultValue;
 
-    // Check for Vercel Toolbar overrides or local manual overrides
-    // using localStorage for simplicity in this stub implementation
-    const override = localStorage.getItem(`flag-${key}`);
-    if (override !== null) {
+    // 1. Check for Vercel Toolbar overrides (cookie)
+    // The cookie name is 'vercel-flag-overrides'
+    // It stores a JSON object of overrides
+    try {
+        const cookies = document.cookie.split(';');
+        const overrideCookie = cookies.find(c => c.trim().startsWith('vercel-flag-overrides='));
+        if (overrideCookie) {
+            const cookieValue = overrideCookie.split('=')[1];
+            // Decode URI component because cookies are often encoded
+            const decodedValue = decodeURIComponent(cookieValue);
+            const overrides = JSON.parse(decodedValue);
+            if (overrides && typeof overrides === 'object' && key in overrides) {
+                return overrides[key] as T;
+            }
+        }
+    } catch (e) {
+        console.warn(`Failed to parse vercel-flag-overrides cookie`, e);
+    }
+
+    // 2. Fallback to localStorage for local testing
+    const localOverride = localStorage.getItem(`flag-${key}`);
+    if (localOverride !== null) {
         try {
-            return JSON.parse(override) as T;
+            return JSON.parse(localOverride) as T;
         } catch (e) {
-            console.error(`Failed to parse flag override for ${key}`, e);
+            console.error(`Failed to parse local flag override for ${key}`, e);
         }
     }
+
     return defaultValue;
 };
 
