@@ -1,0 +1,18 @@
+{
+  "definitions": {
+    "show-settings": {
+      "description": "Show settings page",
+      "options": [
+        { "value": true, "label": "On" },
+        { "value": false, "label": "Off" }
+      ]
+    },
+    "show-documents": {
+      "description": "Show documents page",
+      "options": [
+        { "value": true, "label": "On" },
+        { "value": false, "label": "Off" }
+      ]
+    }
+  }
+}
