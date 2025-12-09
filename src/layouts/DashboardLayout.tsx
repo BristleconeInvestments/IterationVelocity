@@ -1,6 +1,8 @@
 
 import { SidebarProvider, SidebarTrigger, Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar"
 import { Home, BarChart2, Settings, FileText } from "lucide-react"
+import { FlagGuard } from "@/components/FlagGuard"
+import { showSettings, showDocuments } from "@/lib/flags"
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -30,22 +32,26 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                                     </a>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
-                                    <a href="#" className="flex items-center gap-2">
-                                        <FileText className="h-4 w-4" />
-                                        <span>Documents</span>
-                                    </a>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
-                                    <a href="#" className="flex items-center gap-2">
-                                        <Settings className="h-4 w-4" />
-                                        <span>Settings</span>
-                                    </a>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
+                            <FlagGuard flag={showDocuments}>
+                                <SidebarMenuItem>
+                                    <SidebarMenuButton asChild>
+                                        <a href="#" className="flex items-center gap-2">
+                                            <FileText className="h-4 w-4" />
+                                            <span>Documents</span>
+                                        </a>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            </FlagGuard>
+                            <FlagGuard flag={showSettings}>
+                                <SidebarMenuItem>
+                                    <SidebarMenuButton asChild>
+                                        <a href="#" className="flex items-center gap-2">
+                                            <Settings className="h-4 w-4" />
+                                            <span>Settings</span>
+                                        </a>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            </FlagGuard>
                         </SidebarMenu>
                     </SidebarContent>
                 </Sidebar>
