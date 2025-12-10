@@ -3,8 +3,13 @@ import { SidebarProvider, SidebarTrigger, Sidebar, SidebarContent, SidebarHeader
 import { Home, BarChart2, Settings, FileText } from "lucide-react"
 import { FlagGuard } from "@/components/FlagGuard"
 import { showSettings, showDocuments } from "@/lib/flags"
+import { useLocation, Link } from "react-router-dom"
+
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
+    const location = useLocation()
+    const pathname = location.pathname
+
     return (
         <SidebarProvider>
             <div className="flex min-h-screen w-full">
@@ -17,38 +22,38 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                     <SidebarContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
-                                    <a href="#" className="flex items-center gap-2">
+                                <SidebarMenuButton asChild isActive={pathname === "/"}>
+                                    <Link to="/" className="flex items-center gap-2">
                                         <Home className="h-4 w-4" />
                                         <span>Overview</span>
-                                    </a>
+                                    </Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild isActive>
-                                    <a href="#" className="flex items-center gap-2">
+                                <SidebarMenuButton asChild isActive={pathname.startsWith("/reports")}>
+                                    <Link to="/reports" className="flex items-center gap-2">
                                         <BarChart2 className="h-4 w-4" />
                                         <span>Reports</span>
-                                    </a>
+                                    </Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <FlagGuard flag={showDocuments}>
                                 <SidebarMenuItem>
-                                    <SidebarMenuButton asChild>
-                                        <a href="#" className="flex items-center gap-2">
+                                    <SidebarMenuButton asChild isActive={pathname.startsWith("/documents")}>
+                                        <Link to="/documents" className="flex items-center gap-2">
                                             <FileText className="h-4 w-4" />
                                             <span>Documents</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             </FlagGuard>
                             <FlagGuard flag={showSettings}>
                                 <SidebarMenuItem>
-                                    <SidebarMenuButton asChild>
-                                        <a href="#" className="flex items-center gap-2">
+                                    <SidebarMenuButton asChild isActive={pathname.startsWith("/settings")}>
+                                        <Link to="/settings" className="flex items-center gap-2">
                                             <Settings className="h-4 w-4" />
                                             <span>Settings</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             </FlagGuard>
