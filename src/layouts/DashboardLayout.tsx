@@ -4,6 +4,8 @@ import { Home, BarChart2, Settings, FileText } from "lucide-react"
 import { FlagGuard } from "@/components/FlagGuard"
 import { showSettings, showDocuments } from "@/lib/flags"
 import { useLocation, Link } from "react-router-dom"
+import { VercelToolbar } from "@/components/VercelToolbar"
+
 
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -66,6 +68,8 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                         <h1 className="text-2xl font-bold">Dashboard</h1>
                     </div>
                     {children}
+                    {import.meta.env.DEV && <VercelToolbar />}
+
                 </main>
             </div>
         </SidebarProvider>
