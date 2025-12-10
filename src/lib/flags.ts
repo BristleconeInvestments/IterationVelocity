@@ -45,14 +45,14 @@ const getFlagValue = <T>(key: string, defaultValue: T): T => {
 
 export const showSettings: Flag<boolean> = {
     key: 'show-settings',
-    decide: () => getFlagValue('show-settings', true),
+    decide: () => getFlagValue('show-settings', false),
     description: 'Show settings page',
     defaultValue: true
 };
 
 export const showDocuments: Flag<boolean> = {
     key: 'show-documents',
-    decide: () => getFlagValue('show-documents', true),
+    decide: () => getFlagValue('show-documents', false),
     description: 'Show documents page',
     defaultValue: true
 };
