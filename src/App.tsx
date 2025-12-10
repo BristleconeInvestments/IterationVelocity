@@ -8,13 +8,12 @@ import { FlagGuard } from "@/components/FlagGuard"
 import { showSettings, showDocuments } from "@/lib/flags"
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { VercelToolbar } from "@/components/VercelToolbar";
+// import { VercelToolbar } from "@/components/VercelToolbar";
 
 
 function App() {
   return (
     <BrowserRouter>
-      <VercelToolbar />
 
       <Routes>
         <Route
