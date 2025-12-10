@@ -4,6 +4,8 @@ import Reports from "@/pages/Reports"
 import Login from "@/pages/Login"
 import Documents from "@/pages/Documents"
 import Settings from "@/pages/Settings"
+import { FlagGuard } from "@/components/FlagGuard"
+import { showSettings, showDocuments } from "@/lib/flags"
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
@@ -20,8 +22,8 @@ function App() {
                   <Routes>
                     <Route path="/" element={<Navigate to="/reports" replace />} />
                     <Route path="/reports" element={<Reports />} />
-                    <Route path="/documents" element={<Documents />} />
-                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/documents" element={<FlagGuard flag={showDocuments}><Documents /></FlagGuard>} />
+                    <Route path="/settings" element={<FlagGuard flag={showSettings}><Settings /></FlagGuard>} />
                   </Routes>
                 </DashboardLayout>
               </SignedIn>
