@@ -168,6 +168,9 @@ importers:
       '@nx/vite':
         specifier: 22.2.0
         version: 22.2.0(@babel/traverse@7.28.5)(nx@22.2.0)(typescript@5.9.3)(vite@5.4.21(@types/node@24.10.2)(lightningcss@1.30.2))(vitest@4.0.15(@types/node@24.10.2)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.2))
+      '@nx/workspace':
+        specifier: 22.2.0
+        version: 22.2.0
       '@types/node':
         specifier: ^24.10.2
         version: 24.10.2
