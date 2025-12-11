@@ -24,3 +24,11 @@ dist-ssr
 *.sw?
 .vercel
 .env*.local
+.env
+.env.local
+
+
+
+
+.nx/cache
+.nx/workspace-data
